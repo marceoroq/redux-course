@@ -43,3 +43,4 @@ export const getBugsAssignedTo = userId => createSelector(
     state => state.entities.bugs,
     bugs => bugs.filter(bug => bug.assignedTo = userId)
 );
+
