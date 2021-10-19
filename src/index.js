@@ -2,6 +2,7 @@ import configureStore from './store/configureStore';
 import { bugAdded, bugRemoved, bugResolved, bugAssignedToUser } from './store/entities/bugs';
 import { projectAdded } from './store/entities/projects';
 import { userAdded } from './store/entities/users';
+import * as actions from './store/api';
 
 const store = configureStore();
 console.log(store);
@@ -13,7 +14,7 @@ store.subscribe(() => {
 store.dispatch(() => {
     // Call an API
     // If promise is resolved:
-        store.dispatch({ type: "bugsReceived", bugs: [1, 2, 3] });
+        store.dispatch({ type: "bugisReciped", bugs: [1, 2, 3] });
 });
 
 store.dispatch({
@@ -22,8 +23,11 @@ store.dispatch({
 });
 
 store.dispatch({
-    type: 'sarasas',
-    payload: { message: "An error ocurred." }
+    type: actions.apiRequested.type,
+		payload: {
+				url: '/bugs',
+				onSuccess: 'bugsReceived',
+		}
 });
 
 // store.dispatch(userAdded({ name: "Juan Carlo" }));
